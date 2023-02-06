@@ -1,8 +1,8 @@
 # DevOps-Essentials: Final Task 2
 
-## Bash Task 2
+> **Please use branch `task2` for this task**
 
-> :warning: Please use branch `task2` for this task
+## Bash Task 2
 
 Company DEF decided to use testing tool for their employees. But current tool has no json output that can be using for later data processing.
 
