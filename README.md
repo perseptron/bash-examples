@@ -1,8 +1,8 @@
 # DevOps Essentials: Final task 1
 
-## Bash Task 1
+> **Please use branch `task1` for this task**
 
-> :warning: Please use branch `task1` for this task
+## Bash Task 1
 
 Company ABC has uncontrolled process of employee’s accounts creation. Currently process means
 adding names, email and other personal data manually to the accounts.csv file without any rules.
