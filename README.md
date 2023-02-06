@@ -2,6 +2,8 @@
 
 ## Bash Task 2
 
+> :warning: Please use branch `task2` for this task
+
 Company DEF decided to use testing tool for their employees. But current tool has no json output that can be using for later data processing.
 
 1. Need to parce output.txt to convert into output.json:
