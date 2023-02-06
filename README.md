@@ -2,6 +2,8 @@
 
 ## Bash Task 1
 
+> :warning: Please use branch `task1` for this task
+
 Company ABC has uncontrolled process of employee’s accounts creation. Currently process means
 adding names, email and other personal data manually to the accounts.csv file without any rules.
 Department head has decided to improve it based on the naming convention implementation. Good
