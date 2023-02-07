@@ -1,6 +1,6 @@
 # DevOps-Essentials: Final Task 2
 
-> **Please use branch `task2` for this task**
+> **Please use branch `task2` for this task that already exist in your forked repository after you has been started task**
 
 ## Bash Task 2
 
