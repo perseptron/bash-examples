@@ -2,7 +2,7 @@ import os
 import sys
 import csv
 
-
+# this function makes basic changes except emails duplicates
 def process_file():
     global email
     email = list()
@@ -20,6 +20,7 @@ def process_file():
             writer.writerow(row)
 
 
+# functions get list and return duplicates if any
 def find_duplicates(list_with_dups: list):
     dups = list()
     uniq = set()
@@ -30,7 +31,7 @@ def find_duplicates(list_with_dups: list):
             uniq.add(item)
     return dups
 
-
+# this function check email duplicate, if so location_ad added 
 def fix_dups(dups_set: set):
     with open('accounts_tmp.csv', 'r') as file1, open('accounts_new.csv', 'w', newline='') as file2:
         reader = csv.reader(file1)
@@ -44,7 +45,7 @@ def fix_dups(dups_set: set):
 
             writer.writerow(row)
 
-
+#run script
 if __name__ == "__main__":
     process_file()
     fix_dups(set(find_duplicates(email)))
