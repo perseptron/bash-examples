@@ -1,7 +1,8 @@
 #!/bin/bash
 OUTPUT="contacts_new.csv"
 DOMAIN="@abc.com"
-namesake=($(awk -v out="$OUTPUT" -v dom="$DOMAIN" 'BEGIN {
+namesake=($(awk -v out="$OUTPUT" -v dom="$DOMAIN" '
+BEGIN {
         FS = OFS = ","
 	#insert headline
         print("id,location_id,name,title,email,department") > out
@@ -12,12 +13,13 @@ NR > 1 {
         mailbox = tolower(substr(username[1], 1, 1) username[2])
 	sub(/./, toupper(substr(username[1], 1, 1)), username[1])
         sub(/./, toupper(substr(username[2], 1, 1)), username[2])
-	#formation email's list
+	#email list formation
         a[mailbox] += 1
-	#entering data
+	#entering the data
         print($1, $2, username[1] " " username[2], $4, mailbox dom, $6) > out
 }
 END {
+	#finding doppelganger emails
         for (key in a) {
                 if (a[key] > 1) {
                         keys = keys key " "
@@ -25,8 +27,7 @@ END {
         }
         print keys
 }' $1))
-
-
+#making corrections with doppelganger
 for email in "${namesake[@]}"; do
   email=$email
   sed -i "s/\([^,]*\),\([^,]*\),\([^,]*\),\([^,]*\),\($email$domain\)/\1,\2,\3,\4,$email\2/" $OUTPUT
