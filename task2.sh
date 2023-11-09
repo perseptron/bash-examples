@@ -1,5 +1,6 @@
 #!/bin/bash
 INPUT=$1
+OUTPUT=${1%.*}".json"
 function header(){
   re='\[(.*?)\].*1..([0-9]+)'
   if [[ $line =~ $re ]]; then
@@ -8,7 +9,6 @@ function header(){
   else
     echo "something wrong with header"
   fi
-  echo $title $test_num
 }
 
 function body(){
@@ -22,7 +22,6 @@ function body(){
   else
     echo "something wrong with body"
   fi
-  echo "test# $num completed in $time""ms and result is $result because - $message "
 }
 
 function overall(){
@@ -35,9 +34,23 @@ function overall(){
   else
     echo "something wrong with overall"
   fi
-  echo "success: $success, fails: $fails, rate: $rates, time: $total_time"
+  json_compose
 }
 
+function json_compose(){
+  echo "{\"testName\": \"$title\", \"tests\": [" > $OUTPUT
+  for (( i=0; i < "${#num[@]}"; i++ )) ;do
+    echo "{ \"name\": \"${message[$i]}\", \"status\": \"${result[$i]}\", \"duration\": \"${time[$i]}ms\" }" >> $OUTPUT
+    if (( $i != ${#num[@]} -1 ));then
+       echo "," >> $OUTPUT
+    fi
+  done
+  echo "], \"summary\": {\"success\": $success, \"failed\": $fails, \"rating\": $rates, \"duration\": \"$total_time""ms\" } }" >> $OUTPUT
+  unset message
+  unset result
+  unset time
+  unset num
+}
 
 while read -r line; do
   if [[ "${line:0:1}" == "[" ]]; then
